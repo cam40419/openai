@@ -32,18 +32,18 @@ class chat_completion:
     def __init__(self, preset_name="DEFAULT", save_name=None):
         # Load preset configurations
         self.presets = configparser.ConfigParser()
-        preset_file = os.getenv("PRESET_FILE")
+        preset_file = os.getenv("OPENAI_PRESET_FILE")
         self.presets.read(preset_file)
         self.preset_name = preset_name
         
         # Load environment variables
         load_dotenv()
-        api_key = os.getenv("API_KEY")
+        api_key = os.getenv("OPENAI_API_KEY")
         self.client = OpenAI(api_key=api_key)
 
         # Load save and response format file paths
-        self.save_file = os.getenv("SAVE_FILE")
-        self.response_format_file = os.getenv("RESPONSE_FORMAT_FILE")
+        self.save_file = os.getenv("OPENAI_SAVE_FILE")
+        self.response_format_file = os.getenv("OPENAI_RESPONSE_FORMAT_FILE")
 
         # Attempt to load saved conversation
         if save_name is None:
